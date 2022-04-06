@@ -11,10 +11,18 @@ fn main() {
     let config_resource = Local(LocalResource {
         local_path: PathBuf::from("config.json"),
     });
+    let vocab_resource = Local(LocalResource {
+        local_path: PathBuf::from("vocab.json"),
+    });
+    let merges_resource = Local(LocalResource {
+        local_path: PathBuf::from("merges.txt"),
+    });
 
     let generate_config = TextGenerationConfig {
         model_resource,
         config_resource,
+        vocab_resource,
+        merges_resource,
         max_length: 50,
         ..Default::default()
     };
