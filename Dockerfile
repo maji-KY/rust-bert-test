@@ -4,7 +4,7 @@ WORKDIR /work
 
 # libtorch
 RUN curl -o libtorch.zip -L "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.11.0%2Bcpu.zip" \
-    && unzip libtorch.zip \
+    && unzip -q libtorch.zip \
     && cp -r libtorch/include/* /usr/local/include/ \
     && cp -r libtorch/lib/* /usr/local/lib/ \
     && cp -r libtorch/share/* /usr/local/share/ \
