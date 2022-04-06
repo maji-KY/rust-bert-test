@@ -23,6 +23,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.TOKEN }}
 
+      - name: Set Repository Name
+        run: echo "docker_repository_name=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build, tag, and push image
         id: push-image
         uses: docker/build-push-action@v2
@@ -31,4 +34,4 @@ jobs:
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          tags: ghcr.io/${{ github.repository_owner }}/rust-bert-test:latest
+          tags: ghcr.io/${{ env.docker_repository_name }}/rust-bert-test:latest
