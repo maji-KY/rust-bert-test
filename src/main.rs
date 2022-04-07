@@ -23,7 +23,8 @@ fn main() {
         config_resource,
         vocab_resource,
         merges_resource,
-        max_length: 50,
+        max_length: 20,
+        num_beams: 3,
         ..Default::default()
     };
 

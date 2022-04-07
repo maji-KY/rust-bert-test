@@ -27,9 +27,12 @@ COPY Cargo.lock Cargo.toml Cargo.lock /app/
 COPY src /app/src
 
 RUN cargo build --release
+
+COPY convert_vocab.py /app/convert_vocab.py
 RUN curl -o config.json -L "https://huggingface.co/rinna/japanese-gpt2-small/resolve/main/config.json" \
-    && curl -o vocab.json -L "https://huggingface.co/gpt2-medium/resolve/main/vocab.json" \
-    && curl -o merges.txt -L "https://huggingface.co/gpt2-medium/resolve/main/merges.txt"
+    && curl -o vocab.txt -L "https://raw.githubusercontent.com/rinnakk/japanese-pretrained-models/master/data/tokenizer/google_sp.vocab" \
+    && curl -o merges.txt -L "https://huggingface.co/gpt2-medium/resolve/main/merges.txt" \
+    && python3 convert_vocab.py
 
 FROM debian:bullseye-slim AS runner
 
